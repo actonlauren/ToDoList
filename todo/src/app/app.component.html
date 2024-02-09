@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()">
+
+  <label for="task">Task</label>
+  <input type="text" name="task" [(ngModel)]="task" />
+
+  <label for="completed">Completed</label>
+  <input type="checkbox" name="completed" [(ngModel)]="completed" />
+
+  <label for="duration">Duration</label>
+  <input type="number" name="duration" [(ngModel)]="duration" />
+
+  <button type="submit">Submit</button>
+  
+</form>
+
+@if (todos.length > 0){
+  <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Completed</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(todo of todos; track todo.task){
+      <tr>
+        <td>{{ todo.task }}</td>
+        <td>{{ todo.completed }}</td>
+        <td>{{ todo.duration }}</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+} @else {
+  <p>No todos found</p>
+}
+  
