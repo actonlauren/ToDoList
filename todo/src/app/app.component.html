@@ -1,38 +1,48 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="handleSubmit()">
 
-  <label for="task">Task</label>
-  <input type="text" name="task" [(ngModel)]="task" />
+  <label for="task"> Task </label>
+  <input type="text" name="task" [(ngModel)]="task" placeholder="Enter task" />
 
-  <label for="completed">Completed</label>
-  <input type="checkbox" name="completed" [(ngModel)]="completed" />
+  <label for="duration">   Duration (minutes) </label>
+  <input type="number" name="duration" [(ngModel)]="duration" placeholder="Enter duration" />
 
-  <label for="duration">Duration</label>
-  <input type="number" name="duration" [(ngModel)]="duration" />
+  <label for="completed">   Completed </label>
+  <input type="checkbox" name="completed" [(ngModel)]="completed" placeholder="Completed"/>
+
 
   <button type="submit">Submit</button>
   
 </form>
 
-@if (todos.length > 0){
+@if (todos.length > 0) {
   <table>
     <thead>
       <tr>
-        <th>Task</th>
-        <th>Completed</th>
-        <th>Duration</th>
+        <th style="padding-right: 20px;">Task</th>
+        <th style="padding-right: 20px;">Duration(minutes)</th>
+        <th style="padding-right: 20px;">isCompleted</th>
+        <th style="padding-right: 20px;">Resolve Task</th>
+        <th>Delete Task</th>
       </tr>
     </thead>
     <tbody>
-      @for(todo of todos; track todo.task){
-      <tr>
-        <td>{{ todo.task }}</td>
-        <td>{{ todo.completed }}</td>
-        <td>{{ todo.duration }}</td>
-      </tr>
-    }
+      @for (todo of todos; track todo.task) {
+        <tr>
+          <td>{{ todo.task }}</td>
+          <td>{{ todo.duration }}</td>
+          <td>{{ todo.completed }}</td>
+          @if (todo.completed == false) {
+            <td><button type="button"(click)="handleComplete(todo.task)">Complete</button></td>
+          } @else {
+            <td><button type="button" disabled>Complete</button></td>
+          }
+          <button type="button" (click)="handleDelete(todo.task)">X</button>
+          
+        </tr>
+      }
     </tbody>
   </table>
 } @else {
-  <p>No todos found</p>
+  <p>Nothing needs to be done!</p>
 }
   

@@ -17,11 +17,20 @@ export class AppComponent {
 
   todos: Todo[] = [];
 
-  onSubmit() {
+  handleSubmit() {
     const newTodo: Todo = {task: this.task, completed: this.completed, duration: this.duration};    
     
     this.todos.push(newTodo);
   }
 
+  handleDelete(task: string) {
+
+    this.todos.splice(this.todos.findIndex(todo => todo.task === task), 1);
+  }
+
+  handleComplete(task: string) {
+
+    this.todos[this.todos.findIndex(todo => todo.task === task)].completed = true;
+  }
 
 }
